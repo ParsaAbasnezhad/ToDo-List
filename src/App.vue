@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <AppHeader />
-    <AppToDo />
+    <AppToDo @AddNewToDo="AddNewToDo" />
     <div class="todo-empty">
       <ToDo :todos="todos" />
       <AppFooter />
@@ -27,10 +27,18 @@ export default {
     return {
       todos:
         [
-          { title: 'Buy milk', id: 1, isCompleted: false },
-          { title: 'Buy milk1', id: 2, isCompleted: true },
+
         ]
     }
+  },
+  methods: {
+    AddNewToDo(title) {
+      if (title) {
+        const todo = { title: title, isCompleted: false };
+        console.log(todo);
+        this.todos.push(todo);
+      }
+    },
   },
 }
 </script>

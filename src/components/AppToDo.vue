@@ -2,14 +2,15 @@
     <div class="todo">
         <div class="controls" role="region" aria-label="کنترل‌ها">
             <label class="search" for="searchInput">
-                <input id="searchInput" type="search" placeholder="Search note..." aria-label="جستجو" />
+                <input class="" v-model="title" @keyup.enter="AddToDo" id="searchInput" type="text"
+                    placeholder="Search note..." aria-label="جستجو" />
                 <img class="search-icon" src="style/svgs/todo-app.svg" alt="" />
+                <button @click="AddToDo" id="themeToggle" type="button" class="search-button">ADD</button>
             </label>
 
             <select id="filterSelect" class="filter" aria-label="فیلتر">
                 <option value="all">ALL</option>
-                <option value="active">Active</option>
-                <option value="done">Completed</option>
+                <option value="active">SERCH</option>
             </select>
 
             <button id="themeToggle" class="theme-toggle" type="button" aria-label="تغییر تم">
@@ -21,7 +22,17 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            title: "",
+        };
+    },
+    methods: {
+        AddToDo() {
+            this.$emit('AddNewToDo', this.title);
+            this.title = "";
+        }
+    }
 }
 </script>
 
@@ -37,7 +48,7 @@ export default {
 
 #searchInput {
     width: 595px;
-    height: 50px;
+    height: 26px;
     border-radius: 8px;
     border: 3px solid #6c63ff;
     background-color: #f7f7f7;
@@ -71,14 +82,17 @@ export default {
 
 #themeToggle {
     background-color: #6c63ff;
-    width: 49px;
-    height: 49px;
+    width: 50px;
+    height: 50px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     margin-left: 10px;
-    margin-right: 10px;
-    margin-top: -1px;
+    margin-right: 9px;
+    margin-top: 2px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: aliceblue;
+    font-size: 21px;
+    font-weight: 500;
 }
 </style>
