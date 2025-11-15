@@ -3,7 +3,7 @@
     <AppHeader />
     <AppToDo @AddNewToDo="AddNewToDo" />
     <div class="todo-empty">
-      <ToDo :todos="todos" />
+      <ToDo :todos="todos" @DeletToDo="DeletToDoClear" @chengStatus="chengStatus" />
       <AppFooter />
     </div>
   </div>
@@ -34,11 +34,19 @@ export default {
   methods: {
     AddNewToDo(title) {
       if (title) {
-        const todo = { title: title, isCompleted: false };
-        console.log(todo);
+        const id = Math.random().toString(16).slice(2);
+        const todo = { id, title: title, isCompleted: false };
         this.todos.push(todo);
       }
     },
+    DeletToDoClear(id) {
+      this.todos = this.todos.filter((todo) => todo.id !== id);
+    }, chengStatus(id, newStatus) {
+      this.todos = this.todos.map(todo =>
+        todo.id === id ? { ...todo, isCompleted: newStatus } : todo
+      );
+      console.log(this.todos);
+    }
   },
 }
 </script>
