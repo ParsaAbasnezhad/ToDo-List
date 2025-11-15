@@ -1,13 +1,14 @@
 <template>
     <div class="todo-list" aria-label="لیست کارها">
-        <ul id="todo-list">
-            <li v-for="todoapp in todos" :key="todoapp.id" :todo="todo" class="todo-item">
+        <ul v-if="todos && todos.length > 0" id="todo-list">
+            <li v-for="todoapp in todos" :key="todoapp.id" :todo="todoapp" class="todo-item">
                 <label class="myCheck">
-                    <input type="checkbox" :checked="todoapp.isCompleted ? true : null" class="todo-item-checkbox" />
+                    <input type="checkbox" :checked="todoapp.isCompleted" class="todo-item-checkbox" />
                     <span class="box"></span>
                     <span class="todo-item-text">{{ todoapp.title }}</span>
                     <span class="todo-item-id">{{ todoapp.id }}</span>
                 </label>
+
                 <div class="btn-cheng-delet">
                     <button type="button" class="todo-item-delete">
                         <img src="style/svgs/Frame 6.svg" alt="" />
@@ -17,8 +18,12 @@
                     </button>
                 </div>
             </li>
-            <hr>
         </ul>
+
+        <div v-else>
+            <img src="style/svgs/Detective-check-footprint 1.svg" alt="هیچ کاری وجود ندارد">
+        </div>
+
     </div>
 </template>
 
