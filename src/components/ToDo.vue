@@ -1,29 +1,12 @@
 <template>
     <div class="todo-list" aria-label="لیست کارها">
         <ul id="todo-list">
-            <li class="todo-item">
+            <li v-for="todoapp in todos" :key="todoapp.id" :todo="todo" class="todo-item">
                 <label class="myCheck">
-                    <input type="checkbox" class="todo-item-checkbox" />
+                    <input type="checkbox" :checked="todoapp.isCompleted ? true : null" class="todo-item-checkbox" />
                     <span class="box"></span>
-                    <span class="todo-item-text">Buy milk</span>
-                    <span class="todo-item-id">#1</span>
-                </label>
-                <div class="btn-cheng-delet">
-                    <button type="button" class="todo-item-delete">
-                        <img src="style/svgs/Frame 6.svg" alt="" />
-                    </button>
-                    <button type="button" class="todo-item-cheng">
-                        <img src="style/svgs/trash-svgrepo-com 1.svg" alt="" />
-                    </button>
-                </div>
-            </li>
-            <hr>
-            <li class="todo-item">
-                <label class="myCheck">
-                    <input type="checkbox" class="todo-item-checkbox" />
-                    <span class="box"></span>
-                    <span class="todo-item-text">Buy milk</span>
-                    <span class="todo-item-id">#1</span>
+                    <span class="todo-item-text">{{ todoapp.title }}</span>
+                    <span class="todo-item-id">{{ todoapp.id }}</span>
                 </label>
                 <div class="btn-cheng-delet">
                     <button type="button" class="todo-item-delete">
@@ -41,6 +24,132 @@
 
 <script>
 export default {
-
+    props: {
+        todos: {
+            type: Array,
+            required: true
+        }
+    }
 }
 </script>
+
+
+<style scoped>
+.todo-list {
+    width: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+#todo-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 650px;
+}
+
+.todo-item {
+    width: 720px;
+    display: flex;
+    justify-content: space-between;
+    gap: 450px;
+    height: 50px;
+    align-items: center;
+    margin-top: 14px;
+}
+
+
+.myCheck {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.myCheck input[type="checkbox"] {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    cursor: pointer;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.myCheck .box {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    border-radius: 4px;
+    background: #ffffff;
+    border: 2px solid #6c63ff;
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.myCheck input[type="checkbox"]:checked+.box {
+    background: #6c63ff;
+    border-color: #6c63ff;
+    transform: scale(1.1);
+}
+
+.myCheck input[type="checkbox"]:hover+.box {
+    border-color: #6c63ff;
+}
+
+.todo-item-text {
+    font-weight: 700;
+    font-size: 20px;
+    color: #252525;
+    cursor: pointer;
+    margin-left: 1rem;
+    width: auto;
+}
+
+.todo-item-id {
+    font-weight: 700;
+    font-size: 20px;
+    color: #252525;
+    cursor: pointer;
+}
+
+.btn-cheng-delet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-item-delete,
+.todo-item-cheng {
+    border: none;
+    background-color: transparent;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    color: #c3c1e5;
+}
+
+/* .todo-item-delete.active {
+  color: red;
+}
+
+.todo-item-cheng.active {
+  color: #00d1b2;
+} */
+
+.todo-item-delete:hover,
+.todo-item-cheng:hover {
+    color: #6c63ff;
+}
+</style>

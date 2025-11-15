@@ -12,4 +12,18 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+
+
+.site-header {
+  display: flex;
+}
+
+.site-title {
+  text-align: center;
+  width: 190px;
+  height: 10px;
+  opacity: 100%;
+  padding: 40px;
+}
+</style>

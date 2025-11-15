@@ -3,7 +3,7 @@
     <AppHeader />
     <AppToDo />
     <div class="todo-empty">
-      <ToDo />
+      <ToDo :todos="todos" />
       <AppFooter />
     </div>
   </div>
@@ -22,18 +22,19 @@ export default {
     AppToDo,
     ToDo,
     AppFooter
-
-  }
+  },
+  data() {
+    return {
+      todos:
+        [
+          { title: 'Buy milk', id: 1, isCompleted: false },
+          { title: 'Buy milk1', id: 2, isCompleted: true },
+        ]
+    }
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+#app {}
 </style>
