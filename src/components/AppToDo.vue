@@ -8,33 +8,62 @@
                 <button @click="AddToDo" id="themeToggle" type="button" class="search-button">ADD</button>
             </label>
 
-            <select id="filterSelect" class="filter" aria-label="فیلتر">
+            <select id="filterSelect" class="filter" aria-label="فیلتر" v-model="activeTab"
+                @change="changeTab(activeTab)">
                 <option value="all">ALL</option>
-                <option value="active">SERCH</option>
+                <option value="active">ACTIVE</option>
+                <option value="completed">COMPLETE</option>
             </select>
 
-            <button id="themeToggle" class="theme-toggle" type="button" aria-label="تغییر تم">
-                <img src="style/svgs/Vector.svg" alt="" />
+            <button @click="ChengThem" id="themeToggle" class="theme-toggle" type="button">
+                <img v-if="defaultTem == 'dark'" :src="sunImage" alt="" />
+                <img v-else :src="moonImage" alt="" />
             </button>
         </div>
     </div>
 </template>
 
 <script>
+import sun from "@/assets/sun.svg";
+import moon from "@/assets/moon.svg";
 export default {
+    props: ["todos"],
+
     data() {
         return {
             title: "",
+            activeTab: "all",
+            sunImage: sun,
+            moonImage: moon,
+            defaultTem: "dark",
         };
     },
     methods: {
         AddToDo() {
             this.$emit('AddNewToDo', this.title);
             this.title = "";
+        },
+        changeTab(tab) {
+            this.$emit('changeTab', tab);
+        },
+        ChengThem() {
+            if (this.defaultTem == 'dark') {
+                this.defaultTem = 'light';
+                document.querySelector("body").classList.add('dark-theme')
+            } else {
+                this.defaultTem = 'dark';
+                document.querySelector("body").classList.remove('dark-theme')
+            }
         }
     }
 }
+
+
 </script>
+
+
+
+
 
 <style scoped>
 .controls {
@@ -50,8 +79,9 @@ export default {
     width: 595px;
     height: 26px;
     border-radius: 8px;
-    border: 3px solid #6c63ff;
-    background-color: #f7f7f7;
+    border: 3px solid var(--color--gray);
+    background-color: var(--color--bg);
+    color: var(--color--black);
     padding: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-size: 16px;
@@ -72,16 +102,16 @@ export default {
     width: 140px;
     height: 49px;
     border-radius: 8px;
-    color: #f7f7f7;
+    color: #F7F7F7;
     border: none;
-    background-color: #6c63ff;
+    background-color: var(--color--gray);
     padding: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-size: 22px;
 }
 
 #themeToggle {
-    background-color: #6c63ff;
+    background-color: var(--color--gray);
     width: 50px;
     height: 50px;
     border-radius: 8px;
@@ -91,7 +121,7 @@ export default {
     margin-right: 9px;
     margin-top: 2px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    color: aliceblue;
+    color: #F7F7F7;
     font-size: 21px;
     font-weight: 500;
 }

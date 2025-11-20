@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <AppHeader />
-    <AppToDo @AddNewToDo="AddNewToDo" />
+    <AppToDo :todos="todos" @changeTab="changeTab" @AddNewToDo="AddNewToDo" />
     <div class="todo-empty">
-      <ToDo :todos="todos" @DeletToDo="DeletToDoClear" @chengStatus="chengStatus" />
+      <ToDo :todosFilter="updateTab" :todos="todos" @DeletToDo="DeletToDoClear" @chengStatus="chengStatus" />
       <AppFooter />
     </div>
   </div>
@@ -25,13 +25,27 @@ export default {
   },
   data() {
     return {
-      todos:
-        [
-
-        ]
+      todos: [],
+      activeTab: "all"
+    }
+  }, computed: {
+    updateTab() {
+      switch (this.activeTab) {
+        case "all":
+          return this.todos;
+        case "active":
+          return this.todos.filter((t) => t.isCompleted == false);
+        case "completed":
+          return this.todos.filter((t) => t.isCompleted == true);
+        default:
+          return this.todos;
+      }
     }
   },
   methods: {
+    changeTab(tab) {
+      this.activeTab = tab;
+    },
     AddNewToDo(title) {
       if (title) {
         const id = Math.random().toString(16).slice(2);
@@ -52,5 +66,5 @@ export default {
 </script>
 
 <style>
-#app {}
+/* #app {} */
 </style>

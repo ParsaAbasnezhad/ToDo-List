@@ -44,7 +44,7 @@ export default {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  background-color: #6c63ff;
+  background-color: var(--color--gray);
   border-radius: 50%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-left: 48rem;
@@ -82,7 +82,7 @@ export default {
 
 
 .cardPlus-content {
-  background: #fff !important;
+  background: var(--color--bg) !important;
   width: 500px;
   height: 300px;
   padding: 22px;
@@ -103,7 +103,7 @@ export default {
 }
 
 .cardPlus-title {
-  color: #252525;
+  color: var(--color--black);
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
   margin-bottom: 86px;
 }
@@ -120,12 +120,12 @@ export default {
 .cardPlus-input-text {
   width: 400px;
   height: 40px;
-  border: 1px solid #6c63ff;
+  border: 1px solid var(--color--gray);
   border-radius: 8px;
   outline: none;
   font-size: 20px;
-  background-color: #F7F7F7;
-  color: #242424;
+  background-color: var(--color--bg);
+  color: var(--color--black);
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -144,8 +144,8 @@ export default {
   border: none;
   border-radius: 8px;
   font-size: 20px;
-  background-color: #6c63ff;
-  color: #F7F7F7;
+  background-color: var(--color--gray);
+  color: var(--color--bg);
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -156,8 +156,8 @@ export default {
   border: 1px solid;
   border-radius: 8px;
   font-size: 20px;
-  background-color: #F7F7F7;
-  color: #6c63ff;
+  background-color: var(--color--bg);
+  color: var(--color--gray);
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

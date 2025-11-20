@@ -1,12 +1,13 @@
 <template>
     <div class="todo-list" aria-label="لیست کارها">
-        <ul v-if="todos && todos.length > 0" id="todo-list">
-            <li v-for="todoapp in todos" :key="todoapp.id" :todo="todoapp" class="todo-item">
+        <ul v-if="todosFilter && todosFilter.length > 0" id="todo-list">
+            <li v-for="todoapp in todosFilter" :key="todoapp.id" :todo="todoapp" class="todo-item">
                 <label class="myCheck">
                     <input type="checkbox" @click="changeStatus(todoapp.id, todoapp.isCompleted)"
                         :checked="todoapp.isCompleted" class="todo-item-checkbox" />
                     <span class="box"></span>
-                    <span class="todo-item-text">{{ todoapp.title }}</span>
+                    <span v-if="todoapp.isCompleted == true" class="todo-completed">{{ todoapp.title }}</span>
+                    <span v-else v-text="todoapp.title" class="todo-item-text"></span>
                 </label>
 
                 <div class="btn-cheng-delet">
@@ -19,7 +20,6 @@
                 </div>
             </li>
         </ul>
-
         <div v-else>
             <img src="style/svgs/Detective-check-footprint 1.svg" alt="هیچ کاری وجود ندارد">
         </div>
@@ -31,6 +31,10 @@
 export default {
     props: {
         todos: {
+            type: Array,
+            required: true
+        },
+        todosFilter: {
             type: Array,
             required: true
         }
@@ -105,39 +109,48 @@ export default {
 
 .myCheck .box {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 31px;
+    height: 31px;
     pointer-events: none;
     border-radius: 4px;
-    background: #ffffff;
-    border: 2px solid #6c63ff;
+    background: var(--color--bg);
+    border: 2px solid var(--color--gray);
     transform: scale(1);
     transition: all 0.3s ease;
 }
 
 .myCheck input[type="checkbox"]:checked+.box {
-    background: #6c63ff;
-    border-color: #6c63ff;
+    background: var(--color--gray);
+    border-color: var(--color--gray);
     transform: scale(1.1);
 }
 
 .myCheck input[type="checkbox"]:hover+.box {
-    border-color: #6c63ff;
+    border-color: var(--color--gray);
 }
 
 .todo-item-text {
     font-weight: 700;
     font-size: 20px;
-    color: #252525;
+    color: var(--color--black);
     cursor: pointer;
     margin-left: 1rem;
     width: auto;
 }
 
+.todo-completed {
+    color: #9ca3af;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #6b7280;
+    transition: 0.2s ease;
+}
+
+
 .todo-item-id {
     font-weight: 700;
     font-size: 20px;
-    color: #252525;
+    color: var(--color--black);
     cursor: pointer;
 }
 
@@ -156,7 +169,7 @@ export default {
     cursor: pointer;
     margin-right: 10px;
     transition: all 0.3s ease;
-    color: #c3c1e5;
+    color: #f0f5ff;
 }
 
 /* .todo-item-delete.active {
@@ -169,6 +182,6 @@ export default {
 
 .todo-item-delete:hover,
 .todo-item-cheng:hover {
-    color: #6c63ff;
+    color: var(--color--gray);
 }
 </style>

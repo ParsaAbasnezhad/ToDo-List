@@ -8,13 +8,10 @@
 
 <script>
 export default {
-
 }
 </script>
 
 <style scoped>
-
-
 .site-header {
   display: flex;
 }
